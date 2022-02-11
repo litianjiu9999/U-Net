@@ -1,13 +1,10 @@
 import torch
 import torch.nn as nn
 
-# device = torch.device("cpu" if not torch.cuda.is_available() else "cuda:0")
-
 class Block(nn.Module):
 
     def __init__(self, in_channels, features):
         super().__init__()
-        # self.features = features.to(device)
         self.features = features
 
         self.conv1 = nn.Conv2d(
@@ -24,14 +21,11 @@ class Block(nn.Module):
                         )
 
     def forward(self, input):
-        # input = input.to(device)
-        num_features=self.features
         x = self.conv1(input)
-        # x = x.to(device) 
-        x = nn.BatchNorm2d(num_features)(x)
+        x = nn.BatchNorm2d(num_features=self.features)(x)
         x = nn.ReLU(inplace=True)(x)
         x = self.conv2(x)
-        x = nn.BatchNorm2d(num_features)(x)
+        x = nn.BatchNorm2d(num_features=self.features)(x)
         x = nn.ReLU(inplace=True)(x)
         return x
 
