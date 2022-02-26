@@ -1,0 +1,25 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: 当前文件",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+            "args": [
+                "--batch-size","1",
+                "--epochs","100",
+                "--lr","0.0001",
+                "--device","cuda:0",
+                "--workers","2",
+                "--ckpts","./ckpts",
+                "--logs","./logs",
+                "--images","./vessel_output",
+                "--image-size","640",
+        }
+    ]
+}

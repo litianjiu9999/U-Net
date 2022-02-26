@@ -13,20 +13,26 @@ class Block(nn.Module):
                             kernel_size=3,
                             padding='same',
                         )
+        self.bn1 = nn.BatchNorm2d(num_features=self.features)
+        self.relu1 = nn.ReLU()
         self.conv2 = nn.Conv2d(
                             in_channels=features,
                             out_channels=features,
                             kernel_size=3,
                             padding='same',
                         )
+        self.bn2 = nn.BatchNorm2d(num_features=self.features)
+        self.relu2 = nn.ReLU()
 
     def forward(self, input):
         x = self.conv1(input)
-        x = nn.BatchNorm2d(num_features=self.features)(x)
-        x = nn.ReLU(inplace=True)(x)
+        x = self.bn1(x)
+        x = self.relu1(x)
         x = self.conv2(x)
-        x = nn.BatchNorm2d(num_features=self.features)(x)
-        x = nn.ReLU(inplace=True)(x)
+        # x = nn.BatchNorm2d(num_features=self.features)(x)
+        # x = nn.ReLU(inplace=True)(x)
+        x = self.bn2(x)
+        x = self.relu2(x)
         return x
 
 class UNet(nn.Module):
